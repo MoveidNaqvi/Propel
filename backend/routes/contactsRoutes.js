@@ -11,7 +11,7 @@ router.get('/', getAllContacts)
 
 router.post('/', addContact)
 
-router.put('/:id', updateContact)
+router.patch('/:id', updateContact)
 
 router.delete('/:id', deleteContact)
 
