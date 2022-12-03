@@ -25,10 +25,21 @@ const addContact = async (req, res) => {
   res.status(201).json(data)
 }
 
-const updateContact = (req, res) => {
-  res.json({
-    message: `Updated contact with id ${req.params.id}`
-  })
+const updateContact = async (req, res) => {
+  const id = req.params.id
+  const updatedContact = req.body
+  try {
+    const { data } = await axios.patch(`http://localhost:3000/contacts/${id}`, updatedContact).catch(error => {
+      res.status(503).json({
+        message: error
+      })
+    })
+    res.status(201).json(data)
+  } catch (error) {
+    res.status(402).json({
+      message: 'Invalid id sent'
+    })
+  }
 }
 
 const deleteContact = (req, res) => {
