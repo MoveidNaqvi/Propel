@@ -76,6 +76,11 @@ table {
   width: 100%;
 }
 
+span{
+  display: block;
+  text-align: center;
+}
+
 th,
 td {
   border: 1px solid #ffffff;
@@ -149,6 +154,17 @@ form * {
 .btn-block {
   width: 100%;
   margin-bottom: 20px;
+}
+
+.action-btns{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.btn-sm {
+  padding: 5px 15px;
+  font-size: 13px;
 }
 
 .btn:hover {

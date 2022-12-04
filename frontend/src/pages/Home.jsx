@@ -1,47 +1,70 @@
-import { useEffect, useState } from "react"
-import { SpinnerCircular } from 'spinners-react';
+import { useEffect, useState } from "react";
+import { SpinnerCircular } from "spinners-react";
+import { MdDeleteForever } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 function Home() {
-
-  const [contacts, setContacts] = useState()
-  const [loading, setLoading] = useState(false)
+  const [contacts, setContacts] = useState();
+  const [loading, setLoading] = useState(false);
+  const [deleted, setDeleted] = useState(false)
 
   useEffect(() => {
     const fetchContacts = async () => {
-      setLoading(true)
-      const response = await fetch('http://localhost:5000/contacts')
-      const data = await response.json()
-      setContacts(data)
-      setLoading(false)
-    }
-    fetchContacts()
+      setLoading(true);
+      const response = await fetch("http://localhost:5000/contacts");
+      const data = await response.json();
+      setContacts(data);
+      setLoading(false);
+    };
+    fetchContacts();
+  }, [deleted]);
 
-  },[])
+  const handleDelete = async (id) => {
+    setDeleted(false)
+    await fetch(`http://localhost:5000/contacts/${id}`, {
+      method: 'DELETE'
+    })
+    setDeleted(true)
+  }
 
   return (
     <>
-      {loading ? <SpinnerCircular color="black" secondaryColor="#777"/> : 
-      <table>
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {contacts?.map((c) => (
-            <tr key={c.id}>
-              <td>{c.first_name}</td>
-              <td>{c.last_name}</td>
-              <td>{c.phone}</td>
-              <td>{c.email}</td>
+      {loading ? (
+        <SpinnerCircular color="black" secondaryColor="#777" />
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>}
+          </thead>
+          <tbody>
+            {contacts?.length <= 0 ? <tr><td colSpan={5}><span>No contacts found!</span></td></tr> : contacts?.map((c) => (
+              <tr key={c.id}>
+                <td>{c.first_name}</td>
+                <td>{c.last_name}</td>
+                <td>{c.phone}</td>
+                <td>{c.email}</td>
+                <td>
+                  <div className="action-btns">
+                    <button className="btn-sm">
+                      <FaEdit size={20} />
+                    </button>
+                    <button className=" btn-sm" onClick={() => handleDelete(c.id)}>
+                      <MdDeleteForever size={20} />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </>
-  )
+  );
 }
-export default Home
+export default Home;
