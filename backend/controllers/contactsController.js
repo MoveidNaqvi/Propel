@@ -1,8 +1,12 @@
 const axios = require('axios').default;
 
 const getAllContacts = async (req, res) => {
-  const { data } = await axios.get('http://localhost:3000/contacts')
-  res.json(data)
+  const json = await axios.get('http://localhost:3000/contacts', {
+    headers: {
+      'Accept-Encoding': 'identity'
+    }
+  })
+  res.json(json.data)
 }
 
 const addContact = async (req, res) => {
