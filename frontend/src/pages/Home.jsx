@@ -20,7 +20,6 @@ function Home() {
 
   return (
     <>
-      {loading ? <SpinnerCircular color="black" secondaryColor="#777"/> : 
       <table>
         <thead>
           <tr>
@@ -31,7 +30,7 @@ function Home() {
           </tr>
         </thead>
         <tbody>
-          {contacts?.map((c) => (
+          {!loading && contacts?.map((c) => (
             <tr key={c.id}>
               <td>{c.first_name}</td>
               <td>{c.last_name}</td>
@@ -40,7 +39,8 @@ function Home() {
             </tr>
           ))}
         </tbody>
-      </table>}
+      </table>
+      {loading ? <SpinnerCircular color="black" secondaryColor="#777"/> : ''}
     </>
   )
 }
