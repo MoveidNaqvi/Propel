@@ -11,7 +11,7 @@ function Header() {
       </div>
       <ul>
         <li>
-          <Link to='/create'><AiOutlinePlus/>Create contact</Link>
+          <Link to='/create'><AiOutlinePlus/>Add contact</Link>
         </li>
       </ul>
     </header>
