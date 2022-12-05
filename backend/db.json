@@ -1,3 +1,25 @@
 {
-  "contacts": []
+  "contacts": [
+    {
+      "first_name": "John",
+      "last_name": "Doe",
+      "phone": "07342738231",
+      "email": "john@gmail.com",
+      "id": 1
+    },
+    {
+      "first_name": "Bruce",
+      "last_name": "Wayne",
+      "phone": "07878643243",
+      "email": "batman@gmail.com",
+      "id": 2
+    },
+    {
+      "first_name": "Harvey",
+      "last_name": "Dent",
+      "phone": "07342897632",
+      "email": "twoface@hotmail.com",
+      "id": 3
+    }
+  ]
 }
