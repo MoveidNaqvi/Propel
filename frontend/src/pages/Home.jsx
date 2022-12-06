@@ -19,6 +19,20 @@ function Home() {
     fetchContacts();
   }, [deleted]);
 
+
+  const updateContact = (updatedContact) => {
+    const updatedContacts = contacts.map(
+      contact => {
+        if(contact.id === updatedContact.id){
+          return updatedContact
+        } else {
+          return contact
+        }
+      }
+    )
+    setContacts(updatedContacts)
+  }
+
   const handleDelete = async (id) => {
     setDeleted(false);
     await fetch(`http://localhost:5000/contacts/${id}`, {
@@ -34,7 +48,7 @@ function Home() {
       ) : (
         <>
           <input type="text" className="search-bar" placeholder="Search by name" value={search} onChange={(e) => setSearch(e.target.value)} />
-          <Table contacts={contacts} search={search} handleDelete={handleDelete}/>
+          <Table contacts={contacts} search={search} handleDelete={handleDelete} updateContact={updateContact}/>
         </>
       )}
     </>

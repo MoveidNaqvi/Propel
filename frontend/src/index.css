@@ -180,3 +180,42 @@ form * {
 .btn:hover {
   transform: scale(0.98);
 }
+
+.modal{
+  /* display: none; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-close{
+  display: none;
+}
+
+.modal-box{
+  margin: 10% auto;
+  width: 500px;
+  background-color: #ffff;
+  position: relative;
+  border-radius: 10px;
+}
+
+.modal-box span{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.modal-body{
+  padding: 40px;
+}
+
+.modal-body h3{
+  margin-bottom: 10px;
+}
