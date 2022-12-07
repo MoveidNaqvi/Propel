@@ -11,7 +11,7 @@ const getAllContacts = async (req, res) => {
 
 const addContact = async (req, res) => {
   const { first_name, last_name, phone, email } = req.body
-  if(!first_name || !last_name || !phone || !email){
+  if (!first_name || !last_name || !phone || !email) {
     return res.status(400).json({
       message: 'All fields are required!'
     })
@@ -32,35 +32,24 @@ const addContact = async (req, res) => {
 const updateContact = async (req, res) => {
   const id = req.params.id
   const updatedContact = req.body
-  try {
-    const { data } = await axios.patch(`http://localhost:3000/contacts/${id}`, updatedContact).catch(error => {
-      res.status(503).json({
-        message: error
-      })
+  const { data } = await axios.patch(`http://localhost:3000/contacts/${id}`, updatedContact).catch(error => {
+    return res.status(404).json({
+      message: error
     })
-    res.status(201).json(data)
-  } catch (error) {
-    res.status(402).json({
-      message: 'Invalid id sent'
-    })
-  }
+  })
+  res.status(201).json(data)
 }
 
 const deleteContact = async (req, res) => {
   const id = req.params.id
-  try {
-    const { data } = await axios.delete(`http://localhost:3000/contacts/${id}`).catch(error => {
-      res.status(503).json({
-        message: error
-      })
+  await axios.delete(`http://localhost:3000/contacts/${id}`).catch(error => {
+    return res.status(404).json({
+      message: error
     })
-    res.status(200).json(data)
-  } catch (error) {
-    res.status(402).json({
-      message: 'Invalid id sent'
-    })
-  }
+  })
+  res.status(200)
 }
+
 
 module.exports = {
   getAllContacts,
