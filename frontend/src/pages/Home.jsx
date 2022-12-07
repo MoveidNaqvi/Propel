@@ -34,7 +34,6 @@ function Home() {
   }
 
   const handleDelete = async (id) => {
-    setDeleted(false);
     await fetch(`http://localhost:5000/contacts/${id}`, {
       method: "DELETE",
     });

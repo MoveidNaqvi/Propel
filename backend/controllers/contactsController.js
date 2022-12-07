@@ -42,12 +42,18 @@ const updateContact = async (req, res) => {
 
 const deleteContact = async (req, res) => {
   const id = req.params.id
-  await axios.delete(`http://localhost:3000/contacts/${id}`).catch(error => {
-    return res.status(404).json({
-      message: error
+  try {
+    const { data } = await axios.delete(`http://localhost:3000/contacts/${id}`).catch(error => {
+      res.status(503).json({
+        message: error
+      })
     })
-  })
-  res.status(200)
+    res.status(200).json(data)
+  } catch (error) {
+    res.status(402).json({
+      message: 'Invalid id sent'
+    })
+  }
 }
 
 
